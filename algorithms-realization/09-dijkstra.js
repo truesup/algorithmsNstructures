@@ -1,5 +1,3 @@
-// поиск кратчайшего пути в графе
-
 const graph = {};
 
 graph.a = { b: 2, c: 1 };
@@ -17,7 +15,7 @@ function shortPath(graph, start, end) {
   Object.keys(graph).forEach(node => {
     if (node !== start) {
       let value = graph[start][node];
-      costs[node] = value || 10000000;
+      costs[node] = value !== undefined ? value : Infinity;
     }
   });
   let node = findNodeLowestCost(costs, processed);
@@ -37,7 +35,7 @@ function shortPath(graph, start, end) {
 }
 
 function findNodeLowestCost(costs, processed) {
-  let lowestCost = 1000000;
+  let lowestCost = Infinity;
   let lowestNode;
   Object.keys(costs).forEach(node => {
     let cost = costs[node];
